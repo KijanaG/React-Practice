@@ -1,0 +1,47 @@
+.Vote-header {
+    font-size: calc(6vmin);
+    text-align: center;
+}
+
+.Vote-library {
+    background-color: rgb(236, 229, 220);
+    margin: 0 24%;
+    height: 10%;
+    align-items: center;
+    border: 2px solid grey;
+}
+
+.Vote-circle {
+    display: inline-block;
+    width: 10vmin;
+    height: 10vmin;
+    margin: 7% 5% 5% 5%;
+    border-radius: 50%;
+    background-color: rgb(206, 196, 182);
+    text-align: center;
+}
+
+.title {
+    margin: 7% 0% 5% 5%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 8vmin;
+}
+
+h3 {
+    text-align: center;
+    font-size: 4vmin;
+    margin-top: 25%;
+}
+
+.button {
+    vertical-align: top;
+    font-weight: bold;
+    float: right;
+    margin: 7% 5% 5% 5%;
+    font-size: 8vmin;
+    color: green;
+    background-color: rgb(236, 229, 220);
+    border: 0;
+    position: relative;
+}

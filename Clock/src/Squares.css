@@ -1,0 +1,23 @@
+.Squares {
+    height: 33%;
+   text-align: center;
+   font-size: 200%;
+}
+
+.Blue {
+    background-color: blue;
+    color : white;
+    display: inline-block;
+} 
+
+.Red {
+    background-color: red;
+    color : blue;
+    display: inline-block;
+} 
+
+.Pink {
+    background-color: pink;
+    color : green;
+    display: inline-block;
+} 

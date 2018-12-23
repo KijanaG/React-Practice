@@ -230,3 +230,151 @@ class App extends Component {
 }
 
 export default App;
+//**************************************************************************\\
+            CSS & RADIUM
+\\**************************************************************************//
+import React from 'react'; //Person.js
+import './Person.css';
+import Radium from 'radium';
+
+const person = ( props ) => {
+    const style = {
+        '@media (min-width: 500px)' : {
+            width: '450px'
+        }
+    }
+    return (
+        <div className="Person" style={style}>
+            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+            <p>{props.children}</p>
+            <input type="text" onChange={props.changed} value={props.name}/>
+        </div>
+);
+}
+
+export default Radium(person); 
+
+///////////////////////////////
+webpack.config.dev.js: <<changes>>
+          {
+            test: cssRegex,
+            exclude: cssModuleRegex,
+            use: getStyleLoaders({
+              importLoaders: 1,
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }),
+          },
+/////////////////////////////////
+webpack.config.prod.js <<changes>>
+          {
+            test: cssRegex,
+            exclude: cssModuleRegex,
+            loader: getStyleLoaders({
+              importLoaders: 1,
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }),
+___________________________________________________________________
+class App extends Component {
+  state = {
+    persons : [
+      {id: 'dfsa', name: 'KJ', age: 30},
+      {id: 'g4vf', name: 'Billy', age: 33},
+      {id: 'ng4uo', name: 'Musa', age: 22}
+    ],
+    showPersons: false
+  }
+  switchNameHandler = (newName) => {
+    // console.log("Was clicked");
+    //Don't Do This this.state.persons[0].name = "Renegade";
+    this.setState({
+      persons: [
+        {name: newName, age: 30},
+        {name: 'Billy', age: 33},
+        {name: 'Musa', age: 22}
+      ]
+    })
+  }
+
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
+  render() {
+
+    let persons = null;
+    let btnClass = '';
+    if(this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return <Person
+            click={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  key={person.id}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}/>
+          })}
+        </div>
+      );
+      btnClass = CSSStyles.Red
+      //style statement inside conditional
+      // style.backgroundColor = "red";
+      // style[':hover'] = { //Radium
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
+
+    }
+
+    const classes = [];
+    if(this.state.persons.length <=2) {
+      classes.push(CSSStyles.red); // classes = ['red']
+    }
+    if(this.state.persons.length <=1) {
+      classes.push(CSSStyles.bold); // classes = ['red', 'bold']
+    }
+
+    return (
+      // <StyleRoot>
+      <div className={CSSStyles.App}>
+        <h1> This is a React App </h1>
+        <p className={classes.join(' ')}>This is working! </p>
+        <button className={btnClass}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {persons}
+      </div>
+      // </StyleRoot>
+    );
+    // return React.createElement('div', {className: 'App'}, 
+    //        React.createElement('h1',{},"This is a React App!"));
+  }
+}
+
+export default App; //Radium(App)

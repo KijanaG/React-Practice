@@ -9,15 +9,15 @@
 .Blog li {
     display: inline-block;
     margin: 20px;
-    background-color: aquamarine;
 }
 
-.Blog li {
+.Blog a {
     text-decoration: none;
     color: black;
 }
 
-.Blog li:hover,
-.Blog li:active {
+.Blog a:hover,
+.Blog a:active,
+.Blog a.active {
     color: #fa923f;
 }

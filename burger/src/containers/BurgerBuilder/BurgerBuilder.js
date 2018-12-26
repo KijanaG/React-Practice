@@ -7,14 +7,19 @@ import axios from '../../axios-orders';
 import withErrorHandler from '../../containers/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
+
+//Set prices for each ingredient
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
     meat: 1.3,
-    bacon: 0.7
+    bacon: 0.7,
+    tomato: 0.5
 };
 
+//BurgerBuilder class renders Burger UI
 class BurgerBuilder extends Component {
+    //BurgerBuilder state holds application data
     state = {
         ingredients: null,
         totalPrice: 4,
@@ -23,15 +28,20 @@ class BurgerBuilder extends Component {
         loading: false,
         error: false
     }
+    
+    //componentDidMount implements axios for GET request to DB
     componentDidMount() {
+        //Then & Catch promise to store ingredients/errords
         axios.get('https://react-burger-project-31d5a.firebaseio.com/ingredients.json')
             .then(res => {
+                console.log("RES:: ",res.data);
                 this.setState({ingredients: res.data});
             }).catch(err => {
                 this.setState({error: true});
                 console.log(err);
             })
     }
+
     updatePurchaseState (ingredients) {
         const sum = Object.keys(ingredients)
             .map(igKey => {
@@ -99,11 +109,11 @@ class BurgerBuilder extends Component {
         }
         axios.post('/orders.json', order)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 this.setState({loading: false, purchasing: false});
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
                 this.setState({loading: false, purchasing: false});
             });
     }

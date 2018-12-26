@@ -20,13 +20,13 @@ axios.interceptors.request.use(req => {
 });
 // axios.interceptors.request.eject(myInterceptor);
 
-axios.interceptors.response.use(res => {
-    console.log(res);
-    return res;
-}), err => {
-    console.log(err);
-    return Promise.reject(err);
-}
+// axios.interceptors.response.use(res => {
+//     console.log(res);
+//     return res;
+// }), err => {
+//     console.log(err);
+//     return Promise.reject(err);
+// }
 
 ReactDOM.render( <App />, document.getElementById( 'root' ) );
 registerServiceWorker();

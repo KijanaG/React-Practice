@@ -12,9 +12,9 @@ const burger = ( props ) => {
     }
     addIngredients("salad");
     addIngredients("tomato");
+    addIngredients("meat");
     addIngredients("cheese");
     addIngredients("bacon");
-    addIngredients("meat");
     let transformedIngredients = ingredientList.map((igKey, i) => {
         return <BurgerIngredient key={igKey+i} type={igKey} />
     })

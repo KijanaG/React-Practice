@@ -58,7 +58,6 @@ const sort = (info) => {
 }
 
 const List = () => {
-    console.log("Hellooo");
     sort(info);
     console.log(info);
     const ListItems = info.map((lib, i) => {

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "react-burger-project",
+    "staging": "react-burger-project-31d5a"
+  }
+}
